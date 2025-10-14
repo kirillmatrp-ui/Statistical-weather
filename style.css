@@ -59,7 +59,7 @@ header h1 {
 
 #search-btn {
     padding: 15px 25px;
-    background: #00b894;
+    background: #981bff;
     color: white;
     border: none;
     border-radius: 25px;
@@ -69,7 +69,7 @@ header h1 {
 }
 
 #search-btn:hover {
-    background: #00a085;
+    background: #981bff;
 }
 
 .weather-card {
