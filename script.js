@@ -1,5 +1,5 @@
 // API ключ (замените на свой с OpenWeatherMap)
-const API_KEY = 'your_api_key_here';
+const API_KEY = '1ba82a70f63414b7883e30d128107fb3';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 const HISTORICAL_URL = 'https://api.openweathermap.org/data/2.5/onecall/timemachine';
 
