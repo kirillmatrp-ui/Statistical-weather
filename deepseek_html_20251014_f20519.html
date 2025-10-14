@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Погода</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Прогноз погоды</h1>
+        </header>
+
+        <div class="search-container">
+            <input type="text" id="city-input" placeholder="Введите город...">
+            <button id="search-btn">Поиск</button>
+        </div>
+
+        <div class="weather-card" id="weather-card">
+            <div class="weather-header">
+                <h2 id="city-name">Выберите город</h2>
+                <div class="date" id="current-date"></div>
+            </div>
+            
+            <div class="weather-main">
+                <div class="temperature">
+                    <span id="temp">--</span>
+                    <span class="temp-unit">°C</span>
+                </div>
+                <div class="weather-icon">
+                    <img id="weather-img" src="" alt="">
+                    <div id="weather-desc">--</div>
+                </div>
+            </div>
+
+            <div class="weather-details">
+                <div class="detail-item">
+                    <span class="label">Ощущается как</span>
+                    <span id="feels-like">--°C</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Влажность</span>
+                    <span id="humidity">--%</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Ветер</span>
+                    <span id="wind">-- м/с</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Давление</span>
+                    <span id="pressure">-- hPa</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="error-message" id="error-message"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
