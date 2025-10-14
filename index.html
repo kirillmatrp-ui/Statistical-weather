@@ -8,53 +8,106 @@
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Прогноз погоды</h1>
-        </header>
+        <div class="main-content">
+            <header>
+                <h1>Прогноз погоды</h1>
+            </header>
 
-        <div class="search-container">
-            <input type="text" id="city-input" placeholder="Введите город...">
-            <button id="search-btn">Поиск</button>
+            <div class="search-container">
+                <input type="text" id="city-input" placeholder="Введите город...">
+                <button id="search-btn">Поиск</button>
+            </div>
+
+            <div class="weather-card" id="weather-card">
+                <div class="weather-header">
+                    <h2 id="city-name">Выберите город</h2>
+                    <div class="date" id="current-date"></div>
+                </div>
+                
+                <div class="weather-main">
+                    <div class="temperature">
+                        <span id="temp">--</span>
+                        <span class="temp-unit">°C</span>
+                    </div>
+                    <div class="weather-icon">
+                        <img id="weather-img" src="" alt="">
+                        <div id="weather-desc">--</div>
+                    </div>
+                </div>
+
+                <div class="weather-details">
+                    <div class="detail-item">
+                        <span class="label">Ощущается как</span>
+                        <span id="feels-like">--°C</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Влажность</span>
+                        <span id="humidity">--%</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Ветер</span>
+                        <span id="wind">-- м/с</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Давление</span>
+                        <span id="pressure">-- hPa</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="error-message" id="error-message"></div>
         </div>
 
-        <div class="weather-card" id="weather-card">
-            <div class="weather-header">
-                <h2 id="city-name">Выберите город</h2>
-                <div class="date" id="current-date"></div>
-            </div>
-            
-            <div class="weather-main">
-                <div class="temperature">
-                    <span id="temp">--</span>
-                    <span class="temp-unit">°C</span>
-                </div>
-                <div class="weather-icon">
-                    <img id="weather-img" src="" alt="">
-                    <div id="weather-desc">--</div>
+        <!-- Правая панель для выбора -->
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <h3>Популярные города</h3>
+                <div class="city-buttons">
+                    <button class="city-btn" data-city="Москва">Москва</button>
+                    <button class="city-btn" data-city="Санкт-Петербург">Санкт-Петербург</button>
+                    <button class="city-btn" data-city="Новосибирск">Новосибирск</button>
+                    <button class="city-btn" data-city="Екатеринбург">Екатеринбург</button>
+                    <button class="city-btn" data-city="Казань">Казань</button>
+                    <button class="city-btn" data-city="Нижний Новгород">Нижний Новгород</button>
                 </div>
             </div>
 
-            <div class="weather-details">
-                <div class="detail-item">
-                    <span class="label">Ощущается как</span>
-                    <span id="feels-like">--°C</span>
+            <div class="sidebar-section">
+                <h3>Настройки</h3>
+                <div class="settings">
+                    <div class="setting-item">
+                        <label class="switch">
+                            <input type="checkbox" id="dark-mode">
+                            <span class="slider"></span>
+                        </label>
+                        <span>Темная тема</span>
+                    </div>
+                    <div class="setting-item">
+                        <label class="switch">
+                            <input type="checkbox" id="auto-location">
+                            <span class="slider"></span>
+                        </label>
+                        <span>Авто-локация</span>
+                    </div>
                 </div>
-                <div class="detail-item">
-                    <span class="label">Влажность</span>
-                    <span id="humidity">--%</span>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>История поиска</h3>
+                <div class="search-history" id="search-history">
+                    <!-- История будет добавляться динамически -->
                 </div>
-                <div class="detail-item">
-                    <span class="label">Ветер</span>
-                    <span id="wind">-- м/с</span>
-                </div>
-                <div class="detail-item">
-                    <span class="label">Давление</span>
-                    <span id="pressure">-- hPa</span>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Единицы измерения</h3>
+                <div class="unit-selector">
+                    <button class="unit-btn active" data-unit="metric">°C</button>
+                    <button class="unit-btn" data-unit="imperial">°F</button>
+                    <button class="unit-btn" data-unit="kelvin">K</button>
                 </div>
             </div>
         </div>
-
-        <div class="error-message" id="error-message"></div>
     </div>
 
     <script src="script.js"></script>
