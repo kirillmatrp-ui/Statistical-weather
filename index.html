@@ -55,6 +55,128 @@
                 </div>
             </div>
 
+            <!-- Статистика погоды -->
+            <div class="stats-container">
+                <div class="stats-tabs">
+                    <button class="stats-tab active" data-period="day">За день</button>
+                    <button class="stats-tab" data-period="week">За неделю</button>
+                    <button class="stats-tab" data-period="month">За месяц</button>
+                </div>
+
+                <div class="stats-content">
+                    <!-- Статистика за день -->
+                    <div class="stats-period active" id="stats-day">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon">📈</div>
+                                <div class="stat-value" id="day-max-temp">--°C</div>
+                                <div class="stat-label">Максимум</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">📉</div>
+                                <div class="stat-value" id="day-min-temp">--°C</div>
+                                <div class="stat-label">Минимум</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">🌡️</div>
+                                <div class="stat-value" id="day-avg-temp">--°C</div>
+                                <div class="stat-label">Средняя</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">💨</div>
+                                <div class="stat-value" id="day-wind-max">-- м/с</div>
+                                <div class="stat-label">Макс. ветер</div>
+                            </div>
+                        </div>
+                        <div class="hourly-forecast">
+                            <h4>Почасовой прогноз</h4>
+                            <div class="hourly-list" id="hourly-list">
+                                <!-- Почасовые данные будут здесь -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Статистика за неделю -->
+                    <div class="stats-period" id="stats-week">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon">📈</div>
+                                <div class="stat-value" id="week-max-temp">--°C</div>
+                                <div class="stat-label">Максимум</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">📉</div>
+                                <div class="stat-value" id="week-min-temp">--°C</div>
+                                <div class="stat-label">Минимум</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">🌡️</div>
+                                <div class="stat-value" id="week-avg-temp">--°C</div>
+                                <div class="stat-label">Средняя</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">🌧️</div>
+                                <div class="stat-value" id="week-rain-days">--</div>
+                                <div class="stat-label">Дождливых дней</div>
+                            </div>
+                        </div>
+                        <div class="weekly-chart">
+                            <h4>Температура по дням</h4>
+                            <div class="chart-container">
+                                <canvas id="week-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Статистика за месяц -->
+                    <div class="stats-period" id="stats-month">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon">📈</div>
+                                <div class="stat-value" id="month-max-temp">--°C</div>
+                                <div class="stat-label">Абс. максимум</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">📉</div>
+                                <div class="stat-value" id="month-min-temp">--°C</div>
+                                <div class="stat-label">Абс. минимум</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">🌡️</div>
+                                <div class="stat-value" id="month-avg-temp">--°C</div>
+                                <div class="stat-label">Средняя за месяц</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">☀️</div>
+                                <div class="stat-value" id="month-sunny-days">--</div>
+                                <div class="stat-label">Солнечных дней</div>
+                            </div>
+                        </div>
+                        <div class="monthly-stats">
+                            <h4>Распределение температуры</h4>
+                            <div class="temp-distribution">
+                                <div class="temp-range">
+                                    <span>Морозные дни (&lt;0°C)</span>
+                                    <span id="month-cold-days">--</span>
+                                </div>
+                                <div class="temp-range">
+                                    <span>Прохладные (0-10°C)</span>
+                                    <span id="month-cool-days">--</span>
+                                </div>
+                                <div class="temp-range">
+                                    <span>Теплые (10-20°C)</span>
+                                    <span id="month-warm-days">--</span>
+                                </div>
+                                <div class="temp-range">
+                                    <span>Жаркие (&gt;20°C)</span>
+                                    <span id="month-hot-days">--</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="error-message" id="error-message"></div>
         </div>
 
@@ -110,6 +232,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
