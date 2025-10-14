@@ -55,6 +55,113 @@
                 </div>
             </div>
 
+            <!-- Статистика погоды -->
+            <div class="stats-container" id="stats-container">
+                <div class="stats-header">
+                    <h2>Статистика погоды</h2>
+                    <div class="stats-tabs">
+                        <button class="stats-tab active" data-period="day">
+                            <span class="tab-icon">📊</span>
+                            За день
+                        </button>
+                        <button class="stats-tab" data-period="week">
+                            <span class="tab-icon">📈</span>
+                            За неделю
+                        </button>
+                        <button class="stats-tab" data-period="month">
+                            <span class="tab-icon">📅</span>
+                            За месяц
+                        </button>
+                    </div>
+                </div>
+
+                <div class="stats-content">
+                    <!-- Статистика за день -->
+                    <div class="stats-period active" id="stats-day">
+                        <div class="charts-grid">
+                            <div class="chart-card">
+                                <h4>Температура за 24 часа</h4>
+                                <div class="chart-wrapper">
+                                    <canvas id="day-temp-chart"></canvas>
+                                </div>
+                            </div>
+                            <div class="chart-card">
+                                <h4>Погодные условия</h4>
+                                <div class="chart-wrapper">
+                                    <canvas id="day-weather-chart"></canvas>
+                                </div>
+                            </div>
+                            <div class="stats-mini-cards">
+                                <div class="mini-card">
+                                    <div class="mini-value" id="day-max-temp">--°C</div>
+                                    <div class="mini-label">Макс. температура</div>
+                                </div>
+                                <div class="mini-card">
+                                    <div class="mini-value" id="day-min-temp">--°C</div>
+                                    <div class="mini-label">Мин. температура</div>
+                                </div>
+                                <div class="mini-card">
+                                    <div class="mini-value" id="day-avg-temp">--°C</div>
+                                    <div class="mini-label">Средняя</div>
+                                </div>
+                                <div class="mini-card">
+                                    <div class="mini-value" id="day-wind-max">-- м/с</div>
+                                    <div class="mini-label">Макс. ветер</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Статистика за неделю -->
+                    <div class="stats-period" id="stats-week">
+                        <div class="charts-grid">
+                            <div class="chart-card wide">
+                                <h4>Температура по дням недели</h4>
+                                <div class="chart-wrapper">
+                                    <canvas id="week-temp-chart"></canvas>
+                                </div>
+                            </div>
+                            <div class="chart-card">
+                                <h4>Распределение осадков</h4>
+                                <div class="chart-wrapper">
+                                    <canvas id="week-precipitation-chart"></canvas>
+                                </div>
+                            </div>
+                            <div class="chart-card">
+                                <h4>Скорость ветра</h4>
+                                <div class="chart-wrapper">
+                                    <canvas id="week-wind-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Статистика за месяц -->
+                    <div class="stats-period" id="stats-month">
+                        <div class="charts-grid">
+                            <div class="chart-card wide">
+                                <h4>Температурный тренд за месяц</h4>
+                                <div class="chart-wrapper">
+                                    <canvas id="month-trend-chart"></canvas>
+                                </div>
+                            </div>
+                            <div class="chart-card">
+                                <h4>Распределение температур</h4>
+                                <div class="chart-wrapper">
+                                    <canvas id="month-distribution-chart"></canvas>
+                                </div>
+                            </div>
+                            <div class="chart-card">
+                                <h4>Типы погоды</h4>
+                                <div class="chart-wrapper">
+                                    <canvas id="month-weather-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="error-message" id="error-message"></div>
         </div>
 
@@ -110,6 +217,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
