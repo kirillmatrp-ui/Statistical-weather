@@ -1,492 +1,295 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* Добавляем эти стили в конец файла */
 
-body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #0100f9 0%, #6d76f9 100%);
-    min-height: 100vh;
-    padding: 20px;
-    transition: background 0.3s ease;
-}
-
-body.dark-mode {
-    background: linear-gradient(135deg, #2d3436 0%, #0984e3 100%);
-}
-
-.container {
-    display: grid;
-    grid-template-columns: 1fr 350px;
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.main-content {
-    display: flex;
-    flex-direction: column;
-}
-
-/* Стили для основной части (остаются прежними) */
-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-header h1 {
-    color: white;
-    font-size: 2.5rem;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-}
-
-.search-container {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 30px;
-}
-
-#city-input {
-    flex: 1;
-    padding: 15px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    outline: none;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-#search-btn {
-    padding: 15px 25px;
-    background: #981bff;
-    color: white;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s ease;
-}
-
-#search-btn:hover {
-    background: #981bff;
-}
-
-.weather-card {
+/* Контейнер статистики */
+.stats-container {
     background: white;
     border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    padding: 25px;
+    margin-top: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     display: none;
 }
 
-body.dark-mode .weather-card {
+body.dark-mode .stats-container {
     background: #2d3436;
     color: white;
 }
 
-.weather-card.active {
+.stats-container.active {
     display: block;
     animation: fadeIn 0.5s ease;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+/* Вкладки статистики */
+.stats-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #dfe6e9;
+    padding-bottom: 15px;
 }
 
-.weather-header {
-    text-align: center;
-    margin-bottom: 20px;
+body.dark-mode .stats-tabs {
+    border-bottom-color: #636e72;
 }
 
-#city-name {
+.stats-tab {
+    background: none;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    color: #636e72;
+}
+
+body.dark-mode .stats-tab {
+    color: #b2bec3;
+}
+
+.stats-tab.active {
+    background: #74b9ff;
+    color: white;
+}
+
+.stats-tab:hover:not(.active) {
+    background: #dfe6e9;
     color: #2d3436;
+}
+
+body.dark-mode .stats-tab:hover:not(.active) {
+    background: #636e72;
+    color: white;
+}
+
+/* Контент статистики */
+.stats-period {
+    display: none;
+}
+
+.stats-period.active {
+    display: block;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Сетка статистики */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    border: 2px solid transparent;
+}
+
+body.dark-mode .stat-card {
+    background: #636e72;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    border-color: #74b9ff;
+}
+
+.stat-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.stat-value {
     font-size: 1.8rem;
+    font-weight: bold;
+    color: #2d3436;
     margin-bottom: 5px;
 }
 
-body.dark-mode #city-name {
+body.dark-mode .stat-value {
     color: white;
 }
 
-.date {
-    color: #636e72;
-    font-size: 1rem;
-}
-
-body.dark-mode .date {
-    color: #b2bec3;
-}
-
-.weather-main {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    padding: 20px 0;
-    border-bottom: 1px solid #dfe6e9;
-}
-
-body.dark-mode .weather-main {
-    border-bottom-color: #636e72;
-}
-
-.temperature {
-    display: flex;
-    align-items: flex-start;
-}
-
-#temp {
-    font-size: 4rem;
-    font-weight: bold;
-    color: #2d3436;
-    line-height: 1;
-}
-
-body.dark-mode #temp {
-    color: white;
-}
-
-.temp-unit {
-    font-size: 2rem;
-    color: #636e72;
-    margin-left: 5px;
-}
-
-body.dark-mode .temp-unit {
-    color: #b2bec3;
-}
-
-.weather-icon {
-    text-align: center;
-}
-
-#weather-img {
-    width: 80px;
-    height: 80px;
-}
-
-#weather-desc {
-    color: #636e72;
-    font-size: 1.1rem;
-    margin-top: 5px;
-    text-transform: capitalize;
-}
-
-body.dark-mode #weather-desc {
-    color: #b2bec3;
-}
-
-.weather-details {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-.detail-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #dfe6e9;
-}
-
-body.dark-mode .detail-item {
-    border-bottom-color: #636e72;
-}
-
-.label {
+.stat-label {
     color: #636e72;
     font-size: 0.9rem;
 }
 
-body.dark-mode .label {
+body.dark-mode .stat-label {
     color: #b2bec3;
 }
 
-.detail-item span:last-child {
+/* Почасовой прогноз */
+.hourly-forecast h4,
+.weekly-chart h4,
+.monthly-stats h4 {
     color: #2d3436;
-    font-weight: bold;
-}
-
-body.dark-mode .detail-item span:last-child {
-    color: white;
-}
-
-.error-message {
-    background: #ff7675;
-    color: white;
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-    margin-top: 20px;
-    display: none;
-}
-
-.error-message.active {
-    display: block;
-    animation: shake 0.5s ease;
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
-}
-
-/* Стили для правой панели */
-.sidebar {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 25px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    height: fit-content;
-    position: sticky;
-    top: 20px;
-}
-
-body.dark-mode .sidebar {
-    background: rgba(45, 52, 54, 0.95);
-    color: white;
-}
-
-.sidebar-section {
-    margin-bottom: 30px;
-}
-
-.sidebar-section:last-child {
-    margin-bottom: 0;
-}
-
-.sidebar-section h3 {
-    color: #2d3436;
-    font-size: 1.2rem;
     margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #74b9ff;
+    font-size: 1.1rem;
 }
 
-body.dark-mode .sidebar-section h3 {
+body.dark-mode .hourly-forecast h4,
+body.dark-mode .weekly-chart h4,
+body.dark-mode .monthly-stats h4 {
     color: white;
-    border-bottom-color: #0984e3;
 }
 
-/* Кнопки городов */
-.city-buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.hourly-list {
+    display: flex;
     gap: 10px;
+    overflow-x: auto;
+    padding: 10px 0;
 }
 
-.city-btn {
-    background: #f1f2f6;
-    border: none;
-    padding: 12px 15px;
+.hourly-item {
+    background: #f8f9fa;
     border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 14px;
-    color: #2d3436;
+    padding: 15px;
+    min-width: 80px;
+    text-align: center;
+    flex-shrink: 0;
 }
 
-body.dark-mode .city-btn {
+body.dark-mode .hourly-item {
     background: #636e72;
+}
+
+.hourly-time {
+    font-weight: bold;
+    color: #2d3436;
+    margin-bottom: 8px;
+}
+
+body.dark-mode .hourly-time {
     color: white;
 }
 
-.city-btn:hover {
-    background: #74b9ff;
-    color: white;
-    transform: translateY(-2px);
+.hourly-temp {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #74b9ff;
+    margin-bottom: 5px;
 }
 
-.city-btn:active {
-    transform: translateY(0);
+.hourly-icon {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 5px;
 }
 
-/* Настройки */
-.settings {
+.hourly-desc {
+    font-size: 0.8rem;
+    color: #636e72;
+}
+
+body.dark-mode .hourly-desc {
+    color: #b2bec3;
+}
+
+/* График */
+.chart-container {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 15px;
+}
+
+body.dark-mode .chart-container {
+    background: #2d3436;
+}
+
+#week-chart {
+    width: 100% !important;
+    height: 200px !important;
+}
+
+/* Статистика за месяц */
+.temp-distribution {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-}
-
-.setting-item {
-    display: flex;
-    align-items: center;
     gap: 12px;
+    margin-top: 15px;
 }
 
-/* Переключатели */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 24px;
-}
-
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
-    border-radius: 24px;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 16px;
-    width: 16px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: .4s;
-    border-radius: 50%;
-}
-
-input:checked + .slider {
-    background-color: #74b9ff;
-}
-
-input:checked + .slider:before {
-    transform: translateX(26px);
-}
-
-/* История поиска */
-.search-history {
-    max-height: 200px;
-    overflow-y: auto;
-}
-
-.history-item {
+.temp-range {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    margin-bottom: 8px;
-    background: #f1f2f6;
-    border-radius: 8px;
-    cursor: pointer;
+    padding: 12px 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
     transition: background 0.3s ease;
 }
 
-body.dark-mode .history-item {
+body.dark-mode .temp-range {
     background: #636e72;
 }
 
-.history-item:hover {
+.temp-range:hover {
     background: #dfe6e9;
 }
 
-body.dark-mode .history-item:hover {
+body.dark-mode .temp-range:hover {
     background: #b2bec3;
 }
 
-.history-item:last-child {
-    margin-bottom: 0;
+.temp-range span:first-child {
+    color: #2d3436;
+    font-weight: 500;
 }
 
-.clear-history {
-    background: #ff7675;
+body.dark-mode .temp-range span:first-child {
     color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 10px;
-    width: 100%;
-    transition: background 0.3s ease;
 }
 
-.clear-history:hover {
-    background: #ff5252;
-}
-
-/* Выбор единиц измерения */
-.unit-selector {
-    display: flex;
-    gap: 10px;
-}
-
-.unit-btn {
-    flex: 1;
-    background: #f1f2f6;
-    border: 2px solid transparent;
-    padding: 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.temp-range span:last-child {
     font-weight: bold;
+    color: #74b9ff;
+    font-size: 1.1rem;
 }
 
-body.dark-mode .unit-btn {
-    background: #636e72;
-    color: white;
-}
-
-.unit-btn.active {
-    background: #74b9ff;
-    color: white;
-    border-color: #0984e3;
-}
-
-.unit-btn:hover {
-    transform: translateY(-2px);
-}
-
-/* Адаптивность */
+/* Адаптивность для статистики */
 @media (max-width: 768px) {
-    .container {
-        grid-template-columns: 1fr;
-        gap: 20px;
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
     }
     
-    .sidebar {
-        position: static;
+    .stats-tabs {
+        flex-direction: column;
     }
     
-    .city-buttons {
-        grid-template-columns: 1fr;
+    .hourly-list {
+        flex-wrap: nowrap;
+        overflow-x: auto;
     }
-}
-
-@media (max-width: 600px) {
-    .container {
-        max-width: 100%;
+    
+    .hourly-item {
+        min-width: 70px;
         padding: 10px;
     }
-    
-    header h1 {
-        font-size: 2rem;
-    }
-    
-    .weather-main {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .weather-details {
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
         grid-template-columns: 1fr;
     }
     
-    #temp {
-        font-size: 3rem;
+    .stat-card {
+        padding: 15px;
     }
     
-    .sidebar {
-        padding: 20px;
+    .stats-container {
+        padding: 15px;
     }
 }
