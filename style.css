@@ -490,3 +490,8 @@ body.dark-mode .unit-btn {
         padding: 20px;
     }
 }
+
+ .sidebar {
+        padding: -20px;
+    }
+}
